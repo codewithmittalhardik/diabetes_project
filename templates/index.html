@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiaHealth - Clinical Diabetes Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>DiaHealth<span>.Clinical</span></h1>
+            </div>
+            <nav>
+                <a href="#" class="nav-item active" onclick="switchTab('predict-tab', this)">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                    Risk Assessment
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('food-tab', this)">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    Food Checker
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('dataset-tab', this)">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    Dataset Overview
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>By Hardik Mittal</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h2>Patient Dashboard</h2>
+                <p>Clinical risk assessment and dietary intelligence.</p>
+            </header>
+
+            <div class="tab-content" id="predict-tab">
+                <div class="card form-card">
+                    <h3>Clinical Risk Assessment</h3>
+                    <p class="subtitle">Enter patient health metrics to predict the likelihood of diabetes.</p>
+                    
+                    <form id="prediction-form">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="Glucose">Glucose Level (mg/dL)</label>
+                                <input type="number" id="Glucose" name="Glucose" value="120" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="BloodPressure">Blood Pressure (mm Hg)</label>
+                                <input type="number" id="BloodPressure" name="BloodPressure" value="70" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="BMI">BMI</label>
+                                <input type="number" step="0.1" id="BMI" name="BMI" value="25.0" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="Age">Age</label>
+                                <input type="number" id="Age" name="Age" value="33" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" id="predict-btn">Run Assessment</button>
+                    </form>
+                </div>
+
+                <!-- Results Section (Hidden by default) -->
+                <div id="results-section" class="card result-card hidden">
+                    <h3>Assessment Report</h3>
+                    <div id="prediction-result" class="result-badge"></div>
+                    
+                    <div id="precautions-container" class="hidden">
+                        <h4>Recommended Action Plan</h4>
+                        <ul id="precautions-list" class="styled-list"></ul>
+                        
+                        <h4 class="text-danger">Dietary Restrictions (Foods to Avoid)</h4>
+                        <ul id="foods-avoid-list" class="styled-list warning-list"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content hidden" id="food-tab">
+                <div class="card form-card">
+                    <h3>Dietary Intelligence</h3>
+                    <p class="subtitle">Search for a food item to verify if it is safe for diabetic consumption.</p>
+                    
+                    <form id="food-form" class="search-form">
+                        <div class="search-bar">
+                            <input type="text" id="food_name" name="food_name" placeholder="e.g., White Rice, Oatmeal, Soda..." required>
+                            <button type="submit" class="btn-primary" id="check-food-btn">Verify Food</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="food-result-section" class="card result-card hidden">
+                    <h3>Analysis: <span id="analyzed-food-name"></span></h3>
+                    <div id="food-badge" class="food-verdict-badge"></div>
+                    <div class="ai-advice">
+                        <h4>Clinical Reasoning</h4>
+                        <p id="food-reasoning"></p>
+                        <h4>Recommended Alternatives (Safe to Eat)</h4>
+                        <ul id="food-alternatives" class="styled-list success-list"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dataset Tab -->
+            <div class="tab-content hidden" id="dataset-tab">
+                <div class="card form-card">
+                    <h3>Data Preprocessing & Pipeline</h3>
+                    <p class="subtitle">How we cleaned the raw <code>diabetes.csv</code> dataset before training the model.</p>
+                    <ul class="styled-list">
+                        <li><strong>Feature Selection:</strong> Filtered dataset down to the 4 most critical clinical metrics (Glucose, Blood Pressure, BMI, Age).</li>
+                        <li><strong>Handling Missing Data:</strong> In this dataset, a value of <code>0</code> for Glucose, Blood Pressure, or BMI is biologically impossible and represents missing data. We replaced these <code>0</code>s with <code>NaN</code>.</li>
+                        <li><strong>Median Imputation:</strong> We filled all missing <code>NaN</code> values with the <strong>median</strong> value of their respective columns to prevent data loss.</li>
+                        <li><strong>Feature Scaling:</strong> We applied <code>StandardScaler</code> to normalize the data, ensuring features with larger ranges (like Glucose) don't unfairly dominate smaller features (like BMI) during model training.</li>
+                    </ul>
+                </div>
+
+                <div class="card form-card">
+                    <h3>Pima Indians Diabetes Dataset</h3>
+                    <p class="subtitle">Overview of the dataset used to train the clinical model (Showing first 100 records).</p>
+                    <div class="table-container">
+                        <table id="dataset-table">
+                            <thead>
+                                <tr id="dataset-head"></tr>
+                            </thead>
+                            <tbody id="dataset-body">
+                                <tr><td colspan="9" style="text-align: center;">Loading dataset...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
