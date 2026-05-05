@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Food Checker - DiaHealth AI{% endblock %}
+{% block logo_sub %}Food{% endblock %}
+{% block nav_food %}active{% endblock %}
+
+{% block content %}
+<header class="animate-fade-in">
+    <h2>AI Food Intelligence</h2>
+    <p>Analyze any food item for its clinical impact on blood sugar levels.</p>
+</header>
+
+<div class="card form-card">
+    <h3>Dietary Analysis</h3>
+    <p class="subtitle">Search for a food item (e.g., Oatmeal, White Rice, Soda) to get AI-powered clinical reasoning.</p>
+    
+    <form id="food-form">
+        <div class="search-bar">
+            <input type="text" id="food-input" placeholder="Enter food name..." required>
+            <button type="submit" class="btn-primary">Run AI Analysis</button>
+        </div>
+    </form>
+
+    <div id="food-results" class="hidden animate-fade-in" style="margin-top: 3rem;">
+        <div class="result-header">
+            <h4 id="analyzed-food-name"></h4>
+            <div id="food-verdict" class="food-verdict-badge"></div>
+        </div>
+        
+        <div class="ai-advice" id="food-advice">
+            <h4>Clinical Reasoning</h4>
+            <p id="food-reasoning" class="mb-4"></p>
+            
+            <h4>Recommended Alternatives</h4>
+            <ul id="food-alternatives" class="styled-list success-list"></ul>
+        </div>
+    </div>
+</div>
+
+<div class="card animate-fade-in" style="margin-top: 2.5rem; animation-delay: 0.2s;">
+    <h3>Why use AI for Food?</h3>
+    <p class="subtitle">Our platform uses advanced reasoning to look beyond basic calories.</p>
+    <div class="feature-grid" style="margin-top: 1.5rem;">
+        <div class="feature-card">
+            <h4>Glycemic Index</h4>
+            <p>We analyze how fast a food item will spike your blood sugar levels based on its fiber and carbohydrate content.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Clinical Safety</h4>
+            <p>Our advice is tailored for clinical diabetes management, prioritizing long-term stability over short-term energy.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

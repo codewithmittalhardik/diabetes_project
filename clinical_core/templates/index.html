@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - DiaHealth AI{% endblock %}
+{% block nav_index %}active{% endblock %}
+
+{% block content %}
+<header class="animate-fade-in">
+    <h2>Patient Dashboard</h2>
+    <p>Clinical risk assessment and dietary intelligence.</p>
+</header>
+
+<!-- Predict Tab -->
+<div class="tab-content animate-fade-in" id="predict-tab">
+    <div class="card form-card">
+        <h3>Clinical Health Assessment</h3>
+        <p class="subtitle">Provide your health indicators for an AI-powered diabetes risk analysis.</p>
+        
+        <form id="predict-form">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Age (Years)</label>
+                    <input type="number" name="Age" placeholder="e.g. 45" required min="1" max="120">
+                </div>
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select name="Gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Polyuria (Frequent Urination)</label>
+                    <select name="Polyuria" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Polydipsia (Excessive Thirst)</label>
+                    <select name="Polydipsia" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Sudden Weight Loss</label>
+                    <select name="sudden weight loss" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Irritability</label>
+                    <select name="Irritability" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Visual Blurring</label>
+                    <select name="visual blurring" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Polyphagia (Extreme Hunger)</label>
+                    <select name="Polyphagia" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">Run Assessment</button>
+        </form>
+    </div>
+
+    <div id="results-section" class="hidden animate-fade-in">
+        <div class="card result-card">
+            <h3>Assessment Report</h3>
+            <div id="prediction-result" class="result-badge"></div>
+            
+            <div class="risk-summary">
+                <h4>Risk Profile</h4>
+                <p id="risk-description"></p>
+                <p><strong>Status:</strong> <span id="risk-level-text"></span></p>
+            </div>
+
+            <div id="precautions-container" class="hidden">
+                <h4>Recommended Action Plan</h4>
+                <ul id="precautions-list" class="styled-list success-list"></ul>
+
+                <h4>Dietary Restrictions</h4>
+                <ul id="foods-avoid-list" class="styled-list warning-list"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

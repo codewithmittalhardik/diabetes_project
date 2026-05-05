@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Severity Guide - DiaHealth AI{% endblock %}
+{% block logo_sub %}Guide{% endblock %}
+{% block nav_severity %}active{% endblock %}
+
+{% block extra_head %}
+<style>
+    .severity-card {
+        border-left: 6px solid var(--primary);
+        margin-bottom: 1.5rem;
+        transition: var(--transition);
+    }
+    .severity-card:hover {
+        transform: translateX(5px);
+    }
+    .level-0 { border-color: var(--success); }
+    .level-1 { border-color: #fbbf24; }
+    .level-2 { border-color: #f59e0b; }
+    .level-3 { border-color: var(--danger); }
+    
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .feature-card {
+        background: var(--bg-input);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+    }
+    .feature-card h4 {
+        color: var(--primary);
+        border-bottom: none;
+        margin-top: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<header class="animate-fade-in">
+    <h2>Clinical Severity Guide</h2>
+    <p>Understanding symptom-based indicators and dietary mapping.</p>
+</header>
+
+<section class="card animate-fade-in">
+    <h3>Why this Dataset is Superior</h3>
+    <p class="subtitle">Unlike traditional datasets that focus solely on lab numbers, our early-stage dataset prioritizes clinical symptoms.</p>
+    
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4>Polyuria & Polydipsia</h4>
+            <p>Excessive urination and thirst are primary "Red Flag" indicators. When blood sugar is high, kidneys work overtime to filter it, leading to dehydration and intense thirst.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Sudden Weight Loss</h4>
+            <p>When the body can't use glucose for energy due to insulin issues, it starts burning fat and muscle for fuel, causing rapid, unexplained weight loss.</p>
+        </div>
+        <div class="feature-card">
+            <h4>Delayed Healing</h4>
+            <p>High blood sugar levels over time can affect blood flow and cause nerve damage, which impairs the body's ability to heal wounds and fight infections.</p>
+        </div>
+    </div>
+</section>
+
+<section class="card animate-fade-in" style="animation-delay: 0.2s;">
+    <h3>Symptom-Based Severity Mapping</h3>
+    <p class="subtitle">Our AI categorizes risk into 4 distinct levels to provide more precise dietary intelligence.</p>
+
+    <div class="feature-card severity-card level-0">
+        <h4>Level 0: Negative Class</h4>
+        <p><strong>Status:</strong> No significant indicators detected.</p>
+        <p><strong>Strategy:</strong> Normal balanced diet. Focus on maintenance and routine annual screenings.</p>
+    </div>
+
+    <div class="feature-card severity-card level-1">
+        <h4>Level 1: Early Awareness</h4>
+        <p><strong>Status:</strong> Positive prediction with 1-2 mild symptoms.</p>
+        <p><strong>Strategy:</strong> Focus on high fiber and low-glycemic fruits. Moderate carbohydrate control.</p>
+    </div>
+
+    <div class="feature-card severity-card level-2">
+        <h4>Level 2: High Alert</h4>
+        <p><strong>Status:</strong> Positive prediction with 3-4 significant symptoms.</p>
+        <p><strong>Strategy:</strong> Strict Low-Carb (Keto-friendly) approach. Eliminate all refined flours and sugars immediately.</p>
+    </div>
+
+    <div class="feature-card severity-card level-3">
+        <h4>Level 3: Clinical Intervention</h4>
+        <p><strong>Status:</strong> Positive prediction with 5+ symptoms or extreme indicators.</p>
+        <p><strong>Strategy:</strong> Medical-grade diet plan. Focus on high hydration, calorie deficit, and immediate endocrinologist consultation.</p>
+    </div>
+</section>
+{% endblock %}
