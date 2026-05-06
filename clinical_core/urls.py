@@ -8,4 +8,5 @@ urlpatterns = [
     path('food-checker/', views.food_checker, name='food_checker'),
     path('predict', views.predict, name='predict'),
     path('check-food', views.check_food, name='check_food'),
+    path('dataset-info/', views.dataset_info, name='dataset_info'),
 ]

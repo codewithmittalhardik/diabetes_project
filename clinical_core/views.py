@@ -16,6 +16,9 @@ def tech_stack(request):
 def food_checker(request):
     return render(request, 'food_checker.html')
 
+def dataset_info(request):
+    return render(request, 'dataset_info.html')
+
 @csrf_exempt
 def predict(request):
     if request.method == 'POST':
