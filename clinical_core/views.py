@@ -41,3 +41,11 @@ def check_food(request):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
     return JsonResponse({"error": "POST required"}, status=405)
+
+
+def custom_permission_denied(request, exception=None):
+    return render(request, '403.html', status=403)
+
+
+def custom_csrf_failure(request, reason=""):
+    return render(request, '403.html', status=403)

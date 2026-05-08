@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}403 Forbidden - DiaHealth AI{% endblock %}
+
+{% block content %}
+<header class="animate-fade-in">
+    <h2>403 Forbidden</h2>
+    <p>You do not have permission to access this page.</p>
+</header>
+
+<div class="card animate-fade-in">
+    <h3>Access Restricted</h3>
+    <p class="subtitle">If you expected access here, check your authentication, permissions, or CSRF configuration.</p>
+    <a href="{% url 'index' %}" class="btn-primary" style="display: inline-block; text-decoration: none;">Return Home</a>
+</div>
+{% endblock %}

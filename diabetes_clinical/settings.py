@@ -30,6 +30,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
+CSRF_FAILURE_VIEW = 'clinical_core.views.custom_csrf_failure'
 
 
 # Application definition
